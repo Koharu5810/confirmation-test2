@@ -23,7 +23,7 @@ class SeasonsTableSeeder extends Seeder
 
         foreach ($seasons as $season) {
             DB::table('seasons')->insert([
-                'season' => $season,
+                'name' => $season,
             ]);
         }
     }

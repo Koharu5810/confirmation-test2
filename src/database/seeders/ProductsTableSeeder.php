@@ -28,7 +28,7 @@ class ProductsTableSeeder extends Seeder
                 'name' => 'キウイ',
                 'price' => '800',
                 'description' => 'キウイは甘みと酸味のバランスが絶妙なフルーツです。ビタミンCなどの栄養素も豊富のため、美肌効果や疲労回復効果も期待できます。もぎたてフルーツのスムージーをお召し上がりください！',
-                'seasons' => ['秋, 冬'],
+                'seasons' => ['秋', '冬'],
             ],
             [
                 'name' => 'ストロベリー',
@@ -58,19 +58,19 @@ class ProductsTableSeeder extends Seeder
                 'name' => 'シャインマスカット',
                 'price' => '1400',
                 'description' => '爽やかな香りと上品な甘みが特長的なシャインマスカットは大人から子どもまで大人気のフルーツです。疲れた脳や体のエネルギー補給にも最適の商品です。もぎたてフルーツのスムージーをお召し上がりください！',
-                'seasons' => ['夏, 秋'],
+                'seasons' => ['夏', '秋'],
             ],
             [
                 'name' => 'パイナップル',
                 'price' => '800',
                 'description' => '甘酸っぱさとトロピカルな香りが特徴のパイナップル。当店では甘さと酸味のバランスが絶妙な国産のパイナップルを使用しています。もぎたてフルーツのスムージをお召し上がりください！',
-                'seasons' => ['春, 夏'],
+                'seasons' => ['春', '夏'],
             ],
             [
                 'name' => 'ブドウ',
                 'price' => '1100',
                 'description' => 'ブドウの中でも人気の高い国産の「巨峰」を使用しています。高い糖度と適度な酸味が魅力で、鮮やかなパープルで見た目も可愛い商品です。もぎたてフルーツのスムージーをお召し上がりください！',
-                'seasons' => ['夏, 秋'],
+                'seasons' => ['夏', '秋'],
             ],
             [
                 'name' => 'バナナ',
@@ -81,7 +81,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'メロン',
                 'price' => '900',
-                'seasons' => ['春, 夏'],
+                'seasons' => ['春', '夏'],
             ],
         ];
 
@@ -95,7 +95,7 @@ class ProductsTableSeeder extends Seeder
             ]);
 
             // 中間テーブルへ挿入
-            foreach ($products['seasons'] as $season) {
+            foreach ($product['seasons'] as $season) {
                 DB::table('product_season')->insert([
                     'product_id' => $productId,
                     'season_id' => $seasons[$season],
