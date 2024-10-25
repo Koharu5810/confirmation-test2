@@ -10,6 +10,10 @@ class Season extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'id',
+    ];
+
     // productテーブルのリレーション定義
     public function products()
     {
