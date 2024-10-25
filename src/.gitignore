@@ -13,3 +13,7 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+# Ignore the entire storage directory
+/storage/*
+# ただし、特定のディレクトリやファイルは無視しない
+!/storage/app/public/images/products/
