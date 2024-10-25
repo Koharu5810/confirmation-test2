@@ -102,6 +102,7 @@ class ProductsTableSeeder extends Seeder
             $productId = DB::table('products')->insertGetId([
                 'name' => $product['name'],
                 'price' => $product['price'],
+                'image' => $product['image'],
                 'description' => $product['description'],
             ]);
 
