@@ -24,11 +24,11 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required | string | unique:products,name',
-            'price' => 'required | integer | between:0,10000',
-            'image' => 'required | string | mimes:png,jpg | max:2048',   // maxはファイルサイズ上限。適宜変更
-            'description' => 'required | string | max:120',
-            'season' => 'required | string | unique:seasons,name',
+            'name' => 'required|string|unique:products,name',
+            'price' => 'required|integer|between:0,10000',
+            'image' => 'required|mimes:png,jpg|max:2048',   // maxはファイルサイズ上限。適宜変更
+            'description' => 'required|string|max:120',
+            'season' => 'required|array|unique:seasons,name',
         ];
     }
     public function messages()

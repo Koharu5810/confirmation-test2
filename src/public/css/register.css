@@ -36,6 +36,7 @@
     border: 1px solid skyblue;
 }
 .form__error {
+    color: red;
     border: 1px solid gray;
 }
 .form-image__select {

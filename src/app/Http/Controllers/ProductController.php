@@ -38,13 +38,16 @@ class ProductController extends Controller
         return redirect('index');
     }
     // 商品登録画面表示
-    public function create(ProductRequest $request)
+    public function create()
     {
+
         return view('register');
     }
     // 商品登録
-    public function store()
+    public function store(ProductRequest $request)
     {
+        $form = $request->all();
+        // Product::create($form);
         return redirect('index');
     }
 }
