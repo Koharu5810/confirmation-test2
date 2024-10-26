@@ -41,7 +41,6 @@ class ProductController extends Controller
     public function create()
     {
         $seasons = Season::all();
-        // dd('Create method called');
         return view('register', compact('seasons'));
     }
     // 商品登録

@@ -71,17 +71,13 @@
                 <div class="check-text">複数選択可</div>
             </div>
             <div class="check-group">
-                {{-- @foreach($seasons as $season)
+                @foreach($seasons as $season)
                     <label>
                         <input type="checkbox" name="season[]" value="{{ $season->id }}"
                         @if(in_array($season->id, old('season', []))) checked @endif />
                         {{ $season->name }}
                     </label>
-                @endforeach --}}
-                {{-- <label><input type="checkbox" name="season" value="">春</label>
-                <label><input type="checkbox" name="season" value="">夏</label>
-                <label><input type="checkbox" name="season" value="">秋</label>
-                <label><input type="checkbox" name="season" value="">冬</label> --}}
+                @endforeach
             </div>
             <div class="form__error">
                 @error('season')
@@ -108,7 +104,7 @@
         </div>
     {{-- フォームボタン --}}
         <div class="form__button">
-            <input class="form__button-return" type="submit" value="戻る" name="back"/>
+            <a class="form__button-return" href="{{ route('products.index') }}">戻る</a>
             <input class="form__button-update" type="submit" value="変更を保存" name="send" />
         </div>
     </form>

@@ -13,18 +13,17 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/test-create', [ProductController::class, 'create']);
 
 Route::prefix('/products')->group(function (){
+    // 商品登録
+    Route::get('/register', [ProductController::class, 'create']);
+    Route::post('/register', [ProductController::class, 'store']);
     // 商品一覧
-    Route::get('', [ProductController::class, 'index']);
+    Route::get('', [ProductController::class, 'index'])->name('products.index');
     // 商品詳細
     Route::get('/{productId}', [ProductController::class, 'show']);
     // 商品変更
     Route::post('/{productId}/update', [ProductController::class, 'update']);
-    // 商品登録
-    Route::get('/register', [ProductController::class, 'create']);
-    Route::post('/register', [ProductController::class, 'store']);
     // 検索
     Route::get('/search', [ProductController::class, 'search']);
     // 削除
