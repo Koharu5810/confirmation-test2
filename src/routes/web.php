@@ -20,12 +20,12 @@ Route::prefix('/products')->group(function (){
     Route::post('/register', [ProductController::class, 'store']);
     // 商品一覧
     Route::get('', [ProductController::class, 'index'])->name('products.index');
+    // 検索
+    Route::get('/search', [ProductController::class, 'search']);
     // 商品詳細
     Route::get('/{productId}', [ProductController::class, 'show']);
     // 商品変更
-    Route::post('/{productId}/update', [ProductController::class, 'update']);
-    // 検索
-    Route::get('/search', [ProductController::class, 'search']);
+    Route::patch('/{productId}/update', [ProductController::class, 'update'])->name('products.update');
     // 削除
-    Route::post('/{productId}/delete', [ProductController::class, 'destroy']);
+    Route::delete('/{productId}/delete', [ProductController::class, 'destroy'])->name('products.destroy');
 });

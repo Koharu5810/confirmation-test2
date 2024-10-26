@@ -7,8 +7,9 @@
 
 @section('content')
 <div class="container">
-    <form class="form" action="" method="post">
+    <form class="form" action="{{ route('products.update', $product->id) }}" method="post" enctype="multipart/form-data">
         @csrf
+        @method('patch')  {{-- 商品変更のためのメソッド --}}
         <div class="breadcrumb">
             <a href="{{ route('products.index') }}">商品一覧</a>
             &nbsp;>&nbsp;{{ $product->name }}
@@ -16,7 +17,7 @@
     {{-- 画像選択 --}}
         <div class="form-top">
             <div class="form-image">
-                <img id="imagePreview" src="" alt="商品画像" style="display: none;" />
+                <img id="imagePreview" src="{{ asset($product->image) }}" alt="商品画像" style="display: block;" />
                 <input type="file" name="image" accept="image/*" class="form-image__button" onchange="previewImage(event)"/>
             </div>
             <div class="form__error">
@@ -31,7 +32,7 @@
                 <div class="form-group">
                     <label for="name">商品名</label>
                     <div class="form-group__input">
-                        <input type="text" name="name" placeholder="商品名を入力" value="{{ $product->name, old('name') }}" />
+                        <input type="text" name="name" placeholder="商品名を入力" value="{{ old('name', $product->name) }}" />
                     </div>
                     <div class="form__error">
                         @error('name')
@@ -43,7 +44,7 @@
                 <div class="form-group">
                     <label for="price">値段</label>
                     <div class="form-group__input">
-                        <input type="text" name="price" placeholder="値段を入力" value="{{ $product->price, old('price') }}" />
+                        <input type="text" name="price" placeholder="値段を入力" value="{{ old('price', $product->price) }}" />
                     </div>
                     <div class="form__error">
                         @if($errors->has('price'))
@@ -60,7 +61,7 @@
                         @foreach($seasons as $season)
                             <label>
                                 <input type="checkbox" name="season[]" value="{{ $season->id }}"
-                                @if(in_array($season->id, old('season', []))) checked @endif />
+                                @if($product->seasons->contains($season->id)) checked @endif />
                                 {{ $season->name }}
                             </label>
                         @endforeach
@@ -78,7 +79,7 @@
             <div class="form-group__input">
                 <label for="description">商品説明</label>
             </div>
-            <textarea name="description" placeholder="商品の説明を入力">{{ $product->description, old('description') }}</textarea>
+            <textarea name="description" placeholder="商品の説明を入力">{{ old('description', $product->description) }}</textarea>
             <div class="form__error">
                 @if($errors->has('description'))
                     @foreach($errors->get('description') as $message)
@@ -89,9 +90,15 @@
         </div>
     {{-- フォームボタン --}}
         <div class="form__button">
-            <a class="form__button-return" href="{{ route('products.index') }}">戻る</a>
-            <input class="form__button-update" type="submit" value="変更を保存" name="send" />
-            <input class="form__button-delete" type="submit" value="" /><img src="{{ asset('storage/images/products/trush_icon.png') }}" alt="削除">
+            <a class="form__return-button" href="{{ route('products.index') }}">戻る</a>
+            <input class="form__update-button" type="submit" value="変更を保存" name="send" />
+            <form action="{{ route('products.destroy', $product->id) }}" method="post" style="display: inline;">
+                @csrf
+                @method('delete')
+                <button class="form__delete-button" type="submit">
+                    <img src="{{ asset('storage/images/products/trush_icon.png') }}" alt="削除">
+                </button>
+            </form>
         </div>
     </form>
 </div>
@@ -107,17 +114,13 @@ function previewImage(event) {
         // ファイルの読み込みが完了した際の処理
         reader.onload = function(e) {
             imagePreview.src = e.target.result; // 読み込んだデータをimgタグのsrcに設定
-            imagePreview.style.display = 'block'; // imgを表示
         }
 
         reader.readAsDataURL(file); // 選択されたファイルをDataURLとして読み込む
     } else {
         imagePreview.src = ''; // ファイルが選択されていない場合、srcを空にする
-        imagePreview.style.display = 'none'; // imgを非表示
     }
 }
 </script>
 
 @endsection
-
-

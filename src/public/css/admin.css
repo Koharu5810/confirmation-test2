@@ -19,7 +19,7 @@
 .form-image {
     width: 45%;
 }
-.form-image img{
+.form-image img {
     width: 100%;
     border: 1px solid green;
 }
@@ -40,7 +40,7 @@
 .form-group {
     border: 1px solid gray;
 }
-.form-group input{
+.form-group input {
     border: 1px solid gray;
 }
 .form-group textarea {
@@ -50,13 +50,13 @@
     height: 100px;
     border: 1px solid red;
 }
-.form-group__input{
+.form-group__input {
     margin-bottom: 20px;
 }
 .check-group {
     border: 1px solid red;
 }
-.form__error{
+.form__error {
     color: red;
 }
 
@@ -68,20 +68,20 @@
     align-content: center;
     position: relative;
 }
-.form__button-return{
+.form__return-button {
     margin: 0 10px;
     border: 1px solid purple;
 }
-.form__button-update{
+.form__update-button {
     margin: 0 10px;
     border: 1px solid green;
 }
-.form__button-delete {
+.form__delete-button {
     position: absolute;
     right: 0;
     border: none;
 }
-.form__button-delete img {
+.form__delete-button img {
     width: 20px;
     height: auto;
 }

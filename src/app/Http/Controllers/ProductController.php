@@ -30,8 +30,32 @@ class ProductController extends Controller
         return view('admin', compact('product', 'seasons'));
     }
     // 商品変更
-    public function update(ProductRequest $request)
+    public function update(ProductRequest $request, $productId)
     {
+        $product = Product::findOrFail($productId);
+
+        $product->name = $request->input('name');
+        $product->price = $request->input('price');
+        $product->description = $request->input('description');
+
+        // 画像がアップロードされた場合、画像を保存
+        if ($request->hasFile('image')){
+            // 画像ファイルを取得
+            $image = $request->file('image');
+            // アップロードファイルの名前を取得
+            $file_name = $image->getClientOriginalName();
+
+            // 画像をimagesディレクトリに保存
+            $dir = 'images/products';
+            $image->storeAs($dir, $file_name, 'public');
+            // 新しい画像名を保存
+            $product->image= $file_name;
+        }
+
+        $product->save();
+        // 季節の更新
+        $product->seasons()->sync($request->input('season'));
+
         return redirect()->route('products.index');
     }
     // 商品削除
