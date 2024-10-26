@@ -22,20 +22,23 @@ class ProductController extends Controller
         return view('admin');
     }
     // 商品詳細画面表示
-    public function show(Request $request)
+    public function show(Request $request, $productId)
     {
-        return view('admin');
+        $seasons = Season::all();
+        $product = Product::findOrFail($productId);
+
+        return view('admin', compact('product', 'seasons'));
     }
     // 商品変更
     public function update(ProductRequest $request)
     {
-        return redirect('index');
+        return redirect()->route('products.index');
     }
     // 商品削除
     public function destroy(Request $request)
     {
         Product::find($request->id)->delete();
-        return redirect('index');
+        return redirect()->route('products.index');
     }
     // 商品登録画面表示
     public function create()

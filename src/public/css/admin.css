@@ -16,10 +16,10 @@
 .form-top {
     display: flex;
 }
-.form-img {
+.form-image {
     width: 45%;
 }
-.form-img img{
+.form-image img{
     width: 100%;
     border: 1px solid green;
 }
@@ -79,5 +79,9 @@
 .form__button-delete {
     position: absolute;
     right: 0;
-    border: 1px solid blue;
+    border: none;
+}
+.form__button-delete img {
+    width: 20px;
+    height: auto;
 }
