@@ -23,13 +23,23 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name' => 'required|string|unique:products,name',
             'price' => 'required|integer|between:0,10000',
-            'image' => 'required|mimes:png,jpg,jpeg',
             'description' => 'required|string|max:120',
             'season' => 'required|array|unique:seasons,name',
         ];
+
+        // storeメソッド（画像ファイルを必須）
+        if ($this->isMethod('post')){
+            $rules['image'] = 'required|mimes:png,jpg,jpeg';
+        }
+        // patchメソッド（画像ファイルを任意）
+        if ($this->isMethod('patch')){
+            $rules['image'] = 'nullable|mimes:png,jpg,jpeg';
+        }
+
+        return $rules;
     }
     public function messages()
     {

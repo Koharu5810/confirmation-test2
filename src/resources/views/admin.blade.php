@@ -9,7 +9,7 @@
 <div class="container">
     <form class="form" action="{{ route('products.update', $product->id) }}" method="post" enctype="multipart/form-data">
         @csrf
-        @method('patch')  {{-- 商品変更のためのメソッド --}}
+        @method('PATCH')  {{-- 商品変更のためのメソッド --}}
         <div class="breadcrumb">
             <a href="{{ route('products.index') }}">商品一覧</a>
             &nbsp;>&nbsp;{{ $product->name }}
@@ -92,14 +92,14 @@
         <div class="form__button">
             <a class="form__return-button" href="{{ route('products.index') }}">戻る</a>
             <input class="form__update-button" type="submit" value="変更を保存" name="send" />
-            <form action="{{ route('products.destroy', $product->id) }}" method="post" style="display: inline;">
-                @csrf
-                @method('delete')
-                <button class="form__delete-button" type="submit">
-                    <img src="{{ asset('storage/images/products/trush_icon.png') }}" alt="削除">
-                </button>
-            </form>
         </div>
+    </form>
+    <form action="{{ route('products.destroy', $product->id) }}" method="post" style="display: inline;">
+        @csrf
+        @method('DELETE')
+        <button class="form__delete-button" type="submit">
+            <img src="{{ asset('storage/images/products/trush_icon.png') }}" alt="削除">
+        </button>
     </form>
 </div>
 

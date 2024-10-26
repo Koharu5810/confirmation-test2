@@ -10,18 +10,18 @@ use Psy\CodeCleaner\ReturnTypePass;
 
 class ProductController extends Controller
 {
-    // 商品一覧画面表示
+// 商品一覧画面表示
     public function index()
     {
         $products = Product::with('seasons')->get();
         return view('index', compact('products'));
     }
-    // 商品検索
+// 商品検索
     public function search(Request $request)
     {
         return view('admin');
     }
-    // 商品詳細画面表示
+// 商品詳細画面表示
     public function show(Request $request, $productId)
     {
         $seasons = Season::all();
@@ -29,7 +29,7 @@ class ProductController extends Controller
 
         return view('admin', compact('product', 'seasons'));
     }
-    // 商品変更
+// 商品変更
     public function update(ProductRequest $request, $productId)
     {
         $product = Product::findOrFail($productId);
@@ -43,13 +43,13 @@ class ProductController extends Controller
             // 画像ファイルを取得
             $image = $request->file('image');
             // アップロードファイルの名前を取得
-            $file_name = $image->getClientOriginalName();
+            $file_name = time() . '_' . $image->getClientOriginalName();
 
             // 画像をimagesディレクトリに保存
             $dir = 'images/products';
             $image->storeAs($dir, $file_name, 'public');
             // 新しい画像名を保存
-            $product->image= $file_name;
+            $product->image = $file_name;
         }
 
         $product->save();
@@ -58,10 +58,11 @@ class ProductController extends Controller
 
         return redirect()->route('products.index');
     }
-    // 商品削除
-    public function destroy(Request $request)
+// 商品削除
+    public function destroy($productId)
     {
-        Product::find($request->id)->delete();
+        $product = Product::findOrFail($productId);
+        $product->delete();
         return redirect()->route('products.index');
     }
     // 商品登録画面表示
@@ -72,7 +73,7 @@ class ProductController extends Controller
 
         return view('register', compact('seasons', 'product'));
     }
-    // 商品登録
+// 商品登録
     public function store(ProductRequest $request)
     {
         // 画像ファイルを取得
