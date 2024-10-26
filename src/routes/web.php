@@ -29,7 +29,7 @@ Route::prefix('/products')->group(function (){
     Route::get('', [ProductController::class, 'index']);
     // 商品詳細
     Route::get('/{productId}', [ProductController::class, 'show']);
-    // 商品更新
+    // 商品変更
     Route::post('/{productId}/update', [ProductController::class, 'update']);
     // 商品登録
     Route::get('/register', [ProductController::class, 'create']);
