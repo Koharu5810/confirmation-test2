@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use App\Models\Season;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class ProductController extends Controller
         return view('admin', compact('products'));
     }
     // 商品変更
-    public function update(Request $request)
+    public function update(ProductRequest $request)
     {
         return redirect('index');
     }
@@ -37,7 +38,7 @@ class ProductController extends Controller
         return redirect('index');
     }
     // 商品登録画面表示
-    public function create()
+    public function create(ProductRequest $request)
     {
         return view('register');
     }
