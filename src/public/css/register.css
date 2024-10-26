@@ -26,22 +26,25 @@
     margin-top: 15px;
     display: flex;
 }
-.form-required{
+.form-required {
     background-color: rgb(233, 38, 38);
     color: #fff;
     padding: 0 3px;
     margin-left: 10px;
 }
 .form-group__input {
+    border: 1px solid skyblue;
 }
 .form__error {
     border: 1px solid gray;
 }
 .form-image__select {
+    border: 1px solid skyblue;
 }
 .form-image__button {
+    border: 1px solid skyblue;
 }
-.check-text{
+.check-text {
     color: rgb(233, 38, 38);
 }
 .check-group {
@@ -60,4 +63,5 @@
     margin: 0 10px;
 }
 .form__button-update {
+    border: 1px solid skyblue;
 }
