@@ -1,1 +1,63 @@
 /* 商品登録画面 */
+.container {
+    background-color: #f8f8f8;
+    max-width: 1230px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+.register-info {
+    font: bold 18px;
+}
+.form {
+    width: 80%;
+}
+.form-group {
+    border: 1px solid pink;
+}
+.form-group textarea {
+    resize: none;
+    margin-top: 0;
+    width: 100%;
+    height: 100px;
+}
+.form-title {
+    margin-top: 15px;
+    display: flex;
+}
+.form-required{
+    background-color: rgb(233, 38, 38);
+    color: #fff;
+    padding: 0 3px;
+    margin-left: 10px;
+}
+.form-group__input {
+}
+.form__error {
+    border: 1px solid gray;
+}
+.form-image__select {
+}
+.form-image__button {
+}
+.check-text{
+    color: rgb(233, 38, 38);
+}
+.check-group {
+    border: 1px solid skyblue;
+}
+
+/* ボタン部分 */
+.form__button {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    position: relative;
+}
+.form__button-return {
+    margin: 0 10px;
+}
+.form__button-update {
+}

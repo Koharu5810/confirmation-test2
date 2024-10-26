@@ -17,20 +17,22 @@
     <div class="layout">
 {{-- サイドバー --}}
         <div class="sidebar">
-            <div class="search">
+            <form class="search" action="" method="post">
+                @csrf
                 <div class="search__form">
                     <input type="text" placeholder="商品名で検索">
                 </div>
                 <button class="search__button">検索</button>
-            </div>
-            <div class="sort">
-                <p class="sort__title">価格順で表示</p>
+            </form>
+            <form class="sort" action="" method="get">
+                @csrf
+                <label class="sort__title">価格順で表示</label>
                 <select name="">
                     <option selected deisable>価格で並べ替え</option>
                     <option value="">高い順に表示</option>
                     <option value="">安い順に表示</option>
                 </select>
-            </div>
+            </form>
         </div>
     {{-- 一覧画面 --}}
         <div class="product-listing">

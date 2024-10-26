@@ -7,10 +7,12 @@
 
 @section('content')
 <div class="container">
-    <div class="form">
+    <form class="form" action="" method="post">
+        @csrf
         <div class="breadcrumb">
             <a href="">商品一覧</a>
-                &nbsp;>&nbsp;キウイ</div>
+            &nbsp;>&nbsp;キウイ
+        </div>
     {{-- 画像選択 --}}
         <div class="form-top">
             <div class="form-img">
@@ -85,6 +87,6 @@
             <button class="form__button-update" type="">変更を保存</button>
             <button class="form__button-delete" type="">消</button>
         </div>
-    </div>
+    </form>
 </div>
 @endsection
