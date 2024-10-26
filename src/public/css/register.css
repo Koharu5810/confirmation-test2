@@ -39,8 +39,9 @@
     color: red;
     border: 1px solid gray;
 }
-.form-image__select {
-    border: 1px solid skyblue;
+.form-image img {
+    width: 200px;
+    height: auto;
 }
 .form-image__button {
     border: 1px solid skyblue;

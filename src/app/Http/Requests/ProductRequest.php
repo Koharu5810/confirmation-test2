@@ -26,7 +26,7 @@ class ProductRequest extends FormRequest
         return [
             'name' => 'required|string|unique:products,name',
             'price' => 'required|integer|between:0,10000',
-            'image' => 'required|mimes:png,jpg|max:2048',   // maxはファイルサイズ上限。適宜変更
+            'image' => 'required|mimes:png,jpg,jpeg',
             'description' => 'required|string|max:120',
             'season' => 'required|array|unique:seasons,name',
         ];

@@ -41,13 +41,35 @@ class ProductController extends Controller
     public function create()
     {
         $seasons = Season::all();
-        return view('register', compact('seasons'));
+        $product = new Product();
+
+        return view('register', compact('seasons', 'product'));
     }
     // 商品登録
     public function store(ProductRequest $request)
     {
-        $form = $request->all();
-        // Product::create($form);
-        return redirect('index');
+        // 画像ファイルを取得
+        $image = $request->file('image');
+        // アップロードファイルの名前を取得
+        $file_name = $image->getClientOriginalName();
+
+        // 画像をimagesディレクトリに保存
+        $dir = 'images/products';
+        $image->storeAs($dir, $file_name, 'public');
+
+        // 商品をデータベース・storageディレクトリに保存
+        $product = new Product();
+        $product = Product::create([
+            'name' => $request->input('name'),
+            'price' => $request->input('price'),
+            'description' => $request->input('description'),
+            'image' => $file_name,
+        ]);
+        $product->save();
+
+        // 中間テーブルに季節情報を保存
+        $product->seasons()->attach($request->input('season'));
+
+        return redirect()->route('products.index');
     }
 }

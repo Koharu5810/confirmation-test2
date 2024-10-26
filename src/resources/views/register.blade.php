@@ -7,7 +7,7 @@
 
 @section('content')
 <div class="container">
-    <form class="form" action="/products/register" method="post">
+    <form class="form" action="/products/register" method="post" enctype="multipart/form-data">
         @csrf
         <div class="register-info">
             <h3>商品登録</h3>
@@ -50,10 +50,9 @@
                 <label for="image">商品画像</label>
                 <div class="form-required">必須</div>
             </div>
-            {{-- <img src="storage/images/products/kiwi.png" alt=""> --}}
-            <div class="form-image__select">
-                <button class="form-image__button">ファイルを選択</button>
-                {{-- <div class="form-image__filename">kiwi.png</div> --}}
+            <div class="form-image">
+                <img id="imagePreview" src="" alt="商品画像" style="display: none;" />
+                <input type="file" name="image" accept="image/*" class="form-image__button" onchange="previewImage(event)"/>
             </div>
             <div class="form__error">
                 @if($errors->has('image'))
@@ -109,4 +108,27 @@
         </div>
     </form>
 </div>
+
+<script>
+function previewImage(event) {
+    const imagePreview = document.getElementById('imagePreview');
+    const file = event.target.files[0]; // 選択されたファイルを取得
+
+    if (file) {
+        const reader = new FileReader(); // FileReaderオブジェクトを作成
+
+        // ファイルの読み込みが完了した際の処理
+        reader.onload = function(e) {
+            imagePreview.src = e.target.result; // 読み込んだデータをimgタグのsrcに設定
+            imagePreview.style.display = 'block'; // imgを表示
+        }
+
+        reader.readAsDataURL(file); // 選択されたファイルをDataURLとして読み込む
+    } else {
+        imagePreview.src = ''; // ファイルが選択されていない場合、srcを空にする
+        imagePreview.style.display = 'none'; // imgを非表示
+    }
+}
+</script>
+
 @endsection
