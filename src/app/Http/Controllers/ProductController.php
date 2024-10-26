@@ -24,7 +24,7 @@ class ProductController extends Controller
     // 商品詳細画面表示
     public function show(Request $request)
     {
-        return view('admin', compact('products'));
+        return view('admin');
     }
     // 商品変更
     public function update(ProductRequest $request)
@@ -40,8 +40,9 @@ class ProductController extends Controller
     // 商品登録画面表示
     public function create()
     {
-
-        return view('register');
+        $seasons = Season::all();
+        // dd('Create method called');
+        return view('register', compact('seasons'));
     }
     // 商品登録
     public function store(ProductRequest $request)

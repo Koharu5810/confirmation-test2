@@ -71,10 +71,17 @@
                 <div class="check-text">複数選択可</div>
             </div>
             <div class="check-group">
-                <label><input type="checkbox" name="season" value="">春</label>
+                {{-- @foreach($seasons as $season)
+                    <label>
+                        <input type="checkbox" name="season[]" value="{{ $season->id }}"
+                        @if(in_array($season->id, old('season', []))) checked @endif />
+                        {{ $season->name }}
+                    </label>
+                @endforeach --}}
+                {{-- <label><input type="checkbox" name="season" value="">春</label>
                 <label><input type="checkbox" name="season" value="">夏</label>
                 <label><input type="checkbox" name="season" value="">秋</label>
-                <label><input type="checkbox" name="season" value="">冬</label>
+                <label><input type="checkbox" name="season" value="">冬</label> --}}
             </div>
             <div class="form__error">
                 @error('season')

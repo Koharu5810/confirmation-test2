@@ -16,7 +16,7 @@
     {{-- 画像選択 --}}
         <div class="form-top">
             <div class="form-img">
-                <img src="storage/images/products/kiwi.png" alt="">
+                {{-- <img src="storage/images/products/kiwi.png" alt=""> --}}
                 <div class="form-image__select">
                     <button class="form-image__button">ファイルを選択</button>
                     <div class="form-image__filename">kiwi.png</div>
