@@ -117,7 +117,7 @@ class ProductController extends Controller
             'name' => $request->input('name'),
             'price' => $request->input('price'),
             'description' => $request->input('description'),
-            'image' => $file_name,
+            'image' => 'images/products/' . $file_name,
         ]);
         $product->save();
 
