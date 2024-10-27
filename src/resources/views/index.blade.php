@@ -24,20 +24,20 @@
                 </div>
                 <button class="search__button">検索</button>
             </form>
-            <form class="sort" action="" method="get">
+            <form class="sort-form" action="{{ 'products.index' }}" method="get">
                 @csrf
-                <label class="sort__title">価格順で表示</label>
-                <select name="">
+                <label class="sort__title" for="sort">価格順で表示</label>
+                <select name="sort" class="sort-list">
                     <option selected disabled>価格で並べ替え</option>
-                    <option value="">高い順に表示</option>
-                    <option value="">安い順に表示</option>
+                    <option value="high" {{ $sortOrder === 'high' ? 'selected' : '' }}>高い順に表示</option>
+                    <option value="low" {{ $sortOrder === 'low' ? 'selected' : '' }}>安い順に表示</option>
                 </select>
             </form>
         </div>
-    {{-- 一覧画面 --}}
+{{-- 一覧画面 --}}
         <div class="products">
             <div class="product-listing">
-                @if ($products->isNotEmpty())
+                @if ($products->count() > 0)
                     @foreach ($products as $product)
                         <a href="{{ route('products.show', ['productId' => $product->id]) }}" class="product-item-link">
                             <div class="product-item">

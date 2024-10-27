@@ -11,20 +11,29 @@ use Psy\CodeCleaner\ReturnTypePass;
 class ProductController extends Controller
 {
 // 商品一覧画面表示
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('seasons')->paginate(6);
+        // ソート順を取得
+        $sortOrder = $request->input('sort', 'high');
+        // 商品をソート順に応じて取得
+        $products = Product::with('seasons')
+            ->orderBy('price', $sortOrder === 'high' ? 'desc' : 'asc')
+            ->paginate(6);
 
-        return view('index', compact('products'));
+        return view('index', compact('products', 'sortOrder'));
     }
 // 商品検索
     public function search(Request $request)
     {
         $query = Product::query();
-        $query = $this->getSearchQuery($request, $query);
-        $products = $query->paginate(6);
 
-        return view('index', compact('products'));
+        // ソート順を取得
+        $sortOrder = $request->input('sort', 'high');
+        // 検索条件を適用
+        $query = $this->getSearchQuery($request, $query);
+        $products = $query->orderBy('price', $sortOrder === 'high' ? 'desc' : 'asc')->paginate(6);
+
+        return view('index', compact('products', 'sortOrder'));
     }
 // 検索機能
     private function getSearchQuery($request, $query)

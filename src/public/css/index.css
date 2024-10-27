@@ -1,9 +1,4 @@
 /* 商品一覧画面 */
-.container {
-    max-width: 1230px;
-    margin: 0 auto;
-    background-color: #f8f8f8;
-}
 .search-header {
     display: flex;
     justify-content: space-between;
@@ -28,22 +23,31 @@
 /* サイドバー */
 .sidebar {
     width: 25%;
+    padding: 20px;
     border: 1px solid pink;
 }
 .search {
+    padding-bottom: 20px;
     border: 1px solid yellowgreen;
 }
 .search__form {
+    padding-bottom: 15px;
     border: 1px solid skyblue;
 }
 .search__button {
-    border: 1px solid gray;
+    border: 1px solid orange;
 }
-.sort {
-    border: 1px solid violet;
+.sort-form {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #c6c6c6;
 }
 .sort__title {
+    margin-bottom: 15px;
     border: 1px solid blue;
+}
+.sort__list {
+    margin-bottom: 15px;
+    border: 1px solid violet;
 }
 
 /* 一覧画面 */
