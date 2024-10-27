@@ -6,32 +6,15 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use App\Models\Season;
 use Illuminate\Http\Request;
-use Psy\CodeCleaner\ReturnTypePass;
 
 class ProductController extends Controller
 {
+    private const IMAGE_DIR = 'images/products';
+
 // 商品一覧画面表示
     public function index(Request $request)
     {
-        $query = Product::query();
-
-        // nameキーワード検索
-        if ($request->filled('search')) {
-            $query->where('name', 'like', '%' . $request->input('search') . '%');
-        }
-
-        // ソート順を取得
-        if ($request->filled('sort') && $request->input('sort') === 'high') {
-            $query->orderBy('price', 'desc');
-        } elseif ($request->filled('sort') && $request->input('sort') === 'low') {
-            $query->orderBy('price', 'asc');
-        }
-        // $sortOrder = $request->has('sort') ? $request->input('sort') : null;
-        // if ($sortOrder) {
-        //     $query->orderBy('price', $sortOrder === 'high' ? 'desc' : 'asc');
-        // }
-
-        $products = $query->paginate(6);
+        $products = $this->applySearchAndSort($request, Product::query())->paginate(6);
 
         return view('index', [
             'products' => $products,
@@ -41,21 +24,19 @@ class ProductController extends Controller
 // 商品検索
     public function search(Request $request)
     {
-        $query = Product::query();
-
-        // ソート順を取得
-        $sortOrder = $request->input('sort', 'high');
-        // 検索条件を適用
-        $query = $this->getSearchQuery($request, $query);
-        $products = $query->orderBy('price', $sortOrder === 'high' ? 'desc' : 'asc')->paginate(6);
-
-        return view('index', compact('products', 'sortOrder'));
+        return $this->index($request);
     }
-// 検索機能
-    private function getSearchQuery($request, $query)
+// 検索とソート処理の共通化
+    private function applySearchAndSort(Request $request, $query)
     {
-        if (!empty($request->search)) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+        // 検索
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->input('search') . '%');
+        }
+        // ソート
+        if ($request->filled('sort')) {
+            $sortOrder = $request->input('sort') === 'high' ? 'desc' : 'asc';
+            $query->orderBy('price', $sortOrder);
         }
 
         return $query;
@@ -72,42 +53,18 @@ class ProductController extends Controller
 // 商品変更
     public function update(ProductRequest $request, $productId)
     {
-        // 商品を取得
         $product = Product::findOrFail($productId);
 
-        // 基本情報の更新
-        $product->update($request->only([
-            'name',
-            'price',
-            'description',
-        ]));
+        $product->update($request->only(['name', 'price', 'description']));
 
-        // 画像がアップロードされた場合、画像を保存
-        if ($request->hasFile('image')){
-            // 画像ファイルを取得
-            $image = $request->file('image');
-            // アップロードファイルの名前を取得
-            $file_name = time() . '_' . $image->getClientOriginalName();
-
-            // 画像をimagesディレクトリに保存
-            $dir = 'images/products';
-            $image->storeAs($dir, $file_name, 'public');
-
-            // 元の画像ファイルの削除
-            if ($product->image) {
-                $oldImagePath = public_path('storage/images/products/' . $product->image);
-                if (file_exists($oldImagePath)) {
-                    unlink($oldImagePath);
-                }
-            }
-
-            // 新しい画像名を保存
-            $product->image = $file_name;
+        // 画像ファイルの更新
+        if ($request->hasFile('image')) {
+            $this->deleteImage($product->image);
+            $product->image = $this->saveImage($request->file('image'));
         }
 
-        // 変更を保存
         $product->save();
-        // 季節の更新
+        // 中間テーブルに挿入
         $product->seasons()->sync($request->input('season'));
 
         return redirect()->route('products.index');
@@ -116,22 +73,16 @@ class ProductController extends Controller
     public function destroy($productId)
     {
         $product = Product::findOrFail($productId);
-        // 中間テーブルのデータをクリア
+        // 中間テーブルの四季情報を削除
         $product->seasons()->detach();
-
-        // 画像ファイルの削除
-        if ($product->image) {
-            $imagePath = public_path('storage/images/products/' . $product->image);
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
-            }
-        }
-
+        // 画像ファイルをストレージから削除
+        $this->deleteImage($product->image);
         $product->delete();
 
         return redirect()->route('products.index');
     }
-    // 商品登録画面表示
+
+// 商品登録画面表示
     public function create()
     {
         $seasons = Season::all();
@@ -139,32 +90,38 @@ class ProductController extends Controller
 
         return view('register', compact('seasons', 'product'));
     }
-
 // 商品登録
     public function store(ProductRequest $request)
     {
-        // 画像ファイルを取得
-        $image = $request->file('image');
-        // アップロードファイルの名前を取得
-        $file_name = $image->getClientOriginalName();
-
-        // 画像をimagesディレクトリに保存
-        $dir = 'images/products';
-        $image->storeAs($dir, $file_name, 'public');
-
-        // 商品をデータベース・storageディレクトリに保存
-        $product = new Product();
         $product = Product::create([
             'name' => $request->input('name'),
             'price' => $request->input('price'),
             'description' => $request->input('description'),
-            'image' => 'images/products/' . $file_name,
+            'image' => $this->saveImage($request->file('image')),
         ]);
-        $product->save();
 
-        // 中間テーブルに季節情報を保存
         $product->seasons()->attach($request->input('season'));
 
         return redirect()->route('products.index');
+    }
+
+// 画像保存処理
+    private function saveImage($image)
+    {
+        // ディレクトリ保存時の画像ファイル名生成
+        $fileName = time() . '_' . $image->getClientOriginalName();
+        // 画像ファイルを定数IMAGE_DIRで設定したディレクトリに保存
+        // 'public'はシンボリックリンクに関わる
+        $image->storeAs(self::IMAGE_DIR, $fileName, 'public');
+
+        return self::IMAGE_DIR . '/' . $fileName;
+    }
+// 画像削除処理
+    private function deleteImage($imagePath)
+    {
+        // 画像ファイルのパスを確認
+        if ($imagePath && file_exists(public_path('storage/' . $imagePath))) {
+            @unlink(public_path('storage/' . $imagePath));
+        }
     }
 }
