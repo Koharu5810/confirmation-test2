@@ -104,7 +104,7 @@
     {{-- フォームボタン --}}
         <div class="form__button">
             <a class="form__button-return" href="{{ route('products.index') }}">戻る</a>
-            <input class="form__button-create" type="submit" value="変更を保存" name="send" />
+            <input class="form__button-create" type="submit" value="登録" name="send" />
         </div>
     </form>
 </div>

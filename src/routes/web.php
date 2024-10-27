@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/products')->group(function (){
     // 商品登録
-    Route::get('/register', [ProductController::class, 'create']);
+    Route::get('/register', [ProductController::class, 'create'])->name('products.register');;
     Route::post('/register', [ProductController::class, 'store']);
     // 商品一覧
     Route::get('', [ProductController::class, 'index'])->name('products.index');

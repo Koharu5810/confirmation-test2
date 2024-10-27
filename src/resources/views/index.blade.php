@@ -10,8 +10,8 @@
 {{-- メインコンテンツヘッダー部分 --}}
     <div class="search-header">
         <h3 class="search-header__info">商品一覧</h3>
-        <div class="search-header__button">
-            <button class="addition-button">+ 商品を追加</button>
+        <div class="create-button">
+            <a href="{{ route('products.register') }}">+ 商品を追加</a>
         </div>
     </div>
     <div class="layout">
@@ -35,13 +35,21 @@
             </form>
         </div>
     {{-- 一覧画面 --}}
-        <div class="product-listing">
-            <div class="product-item">
-                <img src="storage/images/products/kiwi.png" alt="キウイ">
-                <div class="product-explanation">
-                    <div class="product-name">キウイ</div>
-                    <div class="product-price">¥800</div>
-                </div>
+        <div class="products">
+            <div class="product-listing">
+                @foreach($products as $product)
+                    <div class="product-item">
+                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" style="display: block;" />
+                        <div class="product-explanation">
+                            <div class="product-name">
+                                {{ $product->name }}
+                            </div>
+                            <div class="product-price">
+                                &yen;{{ $product->price }}
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         {{-- ページネーション --}}
             <div class="pagination">
