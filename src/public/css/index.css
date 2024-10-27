@@ -40,6 +40,7 @@
 .sort-form {
     padding-bottom: 15px;
     border-bottom: 1px solid #c6c6c6;
+    border: 1px solid brown;
 }
 .sort__title {
     margin-bottom: 15px;
@@ -57,7 +58,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    border: 1px solid brown;
 }
 .product-item-link {
     text-decoration: none;

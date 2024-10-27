@@ -13,12 +13,20 @@ class ProductController extends Controller
 // 商品一覧画面表示
     public function index(Request $request)
     {
+        $query = Product::query();
+
+        // nameキーワード検索
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->input('search') . '%');
+        }
+
         // ソート順を取得
-        $sortOrder = $request->input('sort', 'high');
-        // 商品をソート順に応じて取得
-        $products = Product::with('seasons')
-            ->orderBy('price', $sortOrder === 'high' ? 'desc' : 'asc')
-            ->paginate(6);
+        $sortOrder = $request->has('sort') ? $request->input('sort') : null;
+        if ($sortOrder) {
+            $query->orderBy('price', $sortOrder === 'high' ? 'desc' : 'asc');
+        }
+
+        $products = $query->paginate(6);
 
         return view('index', compact('products', 'sortOrder'));
     }
