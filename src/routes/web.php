@@ -21,7 +21,7 @@ Route::prefix('/products')->group(function (){
     // 商品一覧
     Route::get('', [ProductController::class, 'index'])->name('products.index');
     // 検索
-    Route::get('/search', [ProductController::class, 'search']);
+    Route::get('/search', [ProductController::class, 'search'])->name('products.search');
     // 商品詳細
     Route::get('/{productId}', [ProductController::class, 'show'])->name('products.show');
     // 商品変更

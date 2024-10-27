@@ -20,8 +20,22 @@ class ProductController extends Controller
 // 商品検索
     public function search(Request $request)
     {
-        return view('admin');
+        $query = Product::query();
+        $query = $this->getSearchQuery($request, $query);
+        $products = $query->paginate(6);
+
+        return view('index', compact('products'));
     }
+// 検索機能
+    private function getSearchQuery($request, $query)
+    {
+        if (!empty($request->search)) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        return $query;
+    }
+
 // 商品詳細画面表示
     public function show(Request $request, $productId)
     {
@@ -100,6 +114,7 @@ class ProductController extends Controller
 
         return view('register', compact('seasons', 'product'));
     }
+
 // 商品登録
     public function store(ProductRequest $request)
     {

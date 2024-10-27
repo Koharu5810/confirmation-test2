@@ -17,10 +17,10 @@
     <div class="layout">
 {{-- サイドバー --}}
         <div class="sidebar">
-            <form class="search" action="" method="post">
+            <form class="search" action="{{ route('products.search') }}" method="get">
                 @csrf
                 <div class="search__form">
-                    <input type="text" placeholder="商品名で検索">
+                    <input type="text" name="search" placeholder="商品名で検索" value="{{ request('search') }}">
                 </div>
                 <button class="search__button">検索</button>
             </form>
@@ -28,7 +28,7 @@
                 @csrf
                 <label class="sort__title">価格順で表示</label>
                 <select name="">
-                    <option selected deisable>価格で並べ替え</option>
+                    <option selected disabled>価格で並べ替え</option>
                     <option value="">高い順に表示</option>
                     <option value="">安い順に表示</option>
                 </select>
@@ -37,21 +37,25 @@
     {{-- 一覧画面 --}}
         <div class="products">
             <div class="product-listing">
-                @foreach($products as $product)
-                    <a href="{{ route('products.show', ['productId' => $product->id]) }}" class="product-item-link">
-                        <div class="product-item">
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"/>
-                            <div class="product-explanation">
-                                <div class="product-name">
-                                    {{ $product->name }}
-                                </div>
-                                <div class="product-price">
-                                    &yen;{{ $product->price }}
+                @if ($products->isNotEmpty())
+                    @foreach ($products as $product)
+                        <a href="{{ route('products.show', ['productId' => $product->id]) }}" class="product-item-link">
+                            <div class="product-item">
+                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" />
+                                <div class="product-explanation">
+                                    <div class="product-name">
+                                        {{ $product->name }}
+                                    </div>
+                                    <div class="product-price">
+                                        &yen;{{ $product->price }}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                @endforeach
+                        </a>
+                    @endforeach
+                @else
+                    <p>該当の商品が見つかりませんでした。</p>
+                @endif
             </div>
         {{-- ページネーション --}}
             <div class="pagination">
