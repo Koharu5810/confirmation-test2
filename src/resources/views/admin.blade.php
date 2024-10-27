@@ -94,13 +94,17 @@
             <input class="form__update-button" type="submit" value="変更を保存" name="send" />
         </div>
     </form>
-    <form action="{{ route('products.destroy', $product->id) }}" method="post" style="display: inline;">
-        @csrf
-        @method('DELETE')
-        <button class="form__delete-button" type="submit">
-            <img src="{{ asset('storage/images/products/trush_icon.png') }}" alt="削除">
-        </button>
-    </form>
+    @if(!$errors->any())
+        <div class="form__delete">
+            <form action="{{ route('products.destroy', $product->id) }}" method="post" style="display: inline;">
+                @csrf
+                @method('DELETE')
+                <button class="form__delete-button" type="submit">
+                    <img src="{{ asset('storage/images/products/trush_icon.png') }}" alt="削除">
+                </button>
+            </form>
+        </div>
+    @endif
 </div>
 
 <script>

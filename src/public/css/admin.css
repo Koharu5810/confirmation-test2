@@ -2,36 +2,33 @@
 .container {
     background-color: #f8f8f8;
     max-width: 1230px;
+    margin: 0 auto;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     padding: 30px;
 }
 .form {
     width: 80%;
 }
-.breadcrumb {
+.breadcrumb a {
+    color: skyblue;
     border: 1px solid pink;
 }
 .form-top {
     display: flex;
 }
 .form-image {
+    margin-bottom: 20px;
     width: 45%;
 }
 .form-image img {
+    display: block;
     width: 100%;
     border: 1px solid green;
 }
-.form-image__select {
-    display: flex;
-    border: 1px solid violet;
-}
 .form-image__button {
     border: 1px solid blue;
-}
-.form-image__filename {
-    border: 1px solid skyblue;
 }
 .form-detail {
     width: 55%;
@@ -65,8 +62,8 @@
     margin-top: 15px;
     display: flex;
     justify-content: center;
-    align-content: center;
-    position: relative;
+    align-items: center;
+    border: 1px solid blue;
 }
 .form__return-button {
     margin: 0 10px;
@@ -76,9 +73,11 @@
     margin: 0 10px;
     border: 1px solid green;
 }
+.form__delete {
+    margin-left: auto;
+    margin-right: 100px;
+}
 .form__delete-button {
-    position: absolute;
-    right: 0;
     border: none;
 }
 .form__delete-button img {
