@@ -37,7 +37,18 @@
 }
 .form__error {
     color: red;
-    border: 1px solid gray;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid pink;
+}
+.form__error li{
+    color: red;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    border: 1px solid orange;
 }
 .form-image img {
     width: 200px;

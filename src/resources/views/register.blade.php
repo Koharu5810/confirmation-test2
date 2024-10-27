@@ -36,13 +36,13 @@
             <div class="form-group__input">
                 <input type="text" name="price" placeholder="値段を入力" value="{{ old('price') }}" />
             </div>
-            <div class="form__error">
-                @if($errors->has('price'))
+            @if($errors->has('price'))
+                <ul class="form__error">
                     @foreach($errors->get('price') as $message)
-                        <span>{{ $message }}</span>
+                        <li>{{ $message }}</li>
                     @endforeach
-                @endif
-            </div>
+                </ul>
+            @endif
         </div>
     {{-- 画像選択 --}}
         <div class="form-group">
@@ -54,13 +54,13 @@
                 <img id="imagePreview" src="" alt="商品画像" style="display: none;" />
                 <input type="file" name="image" accept="image/*" class="form-image__button" onchange="previewImage(event)"/>
             </div>
-            <div class="form__error">
-                @if($errors->has('image'))
+            @if($errors->has('image'))
+                <ul class="form__error">
                     @foreach($errors->get('image') as $message)
-                        <span>{{ $message }}</span>
+                        <li>{{ $message }}</li>
                     @endforeach
-                @endif
-            </div>
+                </ul>
+            @endif
         </div>
     {{-- 季節 --}}
         <div class="form-group">
@@ -94,11 +94,13 @@
             </div>
             <textarea name="description" placeholder="商品の説明を入力">{{ old('description') }}</textarea>
             <div class="form__error">
-                @if($errors->has('description'))
+            @if($errors->has('description'))
+                <ul class="form__error">
                     @foreach($errors->get('description') as $message)
-                        <span>{{ $message }}</span>
+                        <li>{{ $message }}</li>
                     @endforeach
-                @endif
+                </ul>
+            @endif
             </div>
         </div>
     {{-- フォームボタン --}}

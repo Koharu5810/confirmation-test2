@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProductRequest extends FormRequest
@@ -55,4 +57,5 @@ class ProductRequest extends FormRequest
             'season.required' => '季節を選択してください',
         ];
     }
+
 }
