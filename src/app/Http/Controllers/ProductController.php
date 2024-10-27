@@ -21,14 +21,22 @@ class ProductController extends Controller
         }
 
         // ソート順を取得
-        $sortOrder = $request->has('sort') ? $request->input('sort') : null;
-        if ($sortOrder) {
-            $query->orderBy('price', $sortOrder === 'high' ? 'desc' : 'asc');
+        if ($request->filled('sort') && $request->input('sort') === 'high') {
+            $query->orderBy('price', 'desc');
+        } elseif ($request->filled('sort') && $request->input('sort') === 'low') {
+            $query->orderBy('price', 'asc');
         }
+        // $sortOrder = $request->has('sort') ? $request->input('sort') : null;
+        // if ($sortOrder) {
+        //     $query->orderBy('price', $sortOrder === 'high' ? 'desc' : 'asc');
+        // }
 
         $products = $query->paginate(6);
 
-        return view('index', compact('products', 'sortOrder'));
+        return view('index', [
+            'products' => $products,
+            'sortOrder' => $request->input('sort') ?? null,
+        ]);
     }
 // 商品検索
     public function search(Request $request)

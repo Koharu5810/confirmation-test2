@@ -17,26 +17,22 @@
     <div class="layout">
 {{-- サイドバー --}}
         <div class="sidebar">
-            <form class="search" action="{{ route('products.search') }}" method="get">
+            <form class="form" action="{{ route('products.search') }}" method="get">
                 <div class="search__form">
                     <input type="text" name="search" placeholder="商品名で検索" value="{{ request('search') }}">
                 </div>
-                <button class="search__button">検索</button>
-            </form>
-            <form class="sort-form" action="{{ route('products.index') }}" method="get">
-                @csrf
-                <input type="hidden" name="search" value="{{ request('search') }}">
+                <button type="submit" class="search__button">検索</button>
                 <label class="sort__title" for="sort">価格順で表示</label>
                 <select name="sort" class="sort-list" onchange="this.form.submit()">
-                    <option value="" disabled {{ empty($sortOrder) ? 'selected' : '' }}>価格で並べ替え</option>
-                    <option value="high" {{ $sortOrder === 'high' ? 'selected' : '' }}>高い順に表示</option>
-                    <option value="low" {{ $sortOrder === 'low' ? 'selected' : '' }}>安い順に表示</option>
+                    <option value="" disabled {{ request('sort') === null ? 'selected' : '' }}>価格で並べ替え</option>
+                    <option value="high" {{ request('sort') === 'high' ? 'selected' : '' }}>高い順に表示</option>
+                    <option value="low" {{ request('sort') === 'low' ? 'selected' : '' }}>安い順に表示</option>
                 </select>
         {{-- 並び替えタグ表示 --}}
-            @if (!empty($sortOrder))
+            @if (!empty($sortOrder) && ($sortOrder === 'high' || $sortOrder === 'low'))
                 <div class="sort-tag">
                     <span>{{ $sortOrder === 'high' ? '高い順に表示' : '安い順に表示' }}</span>
-                    <a href="{{ route('products.index', ['search' => request('search') ? '' : request('search')]) }}" class="clear-sort">✕</a>
+                    <a href="{{ route('products.index', ['search' => request('search')]) }}" class="clear-sort">✕</a>
                 </div>
             @endif
             </form>
