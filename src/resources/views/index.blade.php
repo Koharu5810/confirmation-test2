@@ -38,24 +38,24 @@
         <div class="products">
             <div class="product-listing">
                 @foreach($products as $product)
-                    <div class="product-item">
-                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" style="display: block;" />
-                        <div class="product-explanation">
-                            <div class="product-name">
-                                {{ $product->name }}
-                            </div>
-                            <div class="product-price">
-                                &yen;{{ $product->price }}
+                    <a href="{{ route('products.show', ['productId' => $product->id]) }}" class="product-item-link">
+                        <div class="product-item">
+                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"/>
+                            <div class="product-explanation">
+                                <div class="product-name">
+                                    {{ $product->name }}
+                                </div>
+                                <div class="product-price">
+                                    &yen;{{ $product->price }}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
             </div>
         {{-- ページネーション --}}
             <div class="pagination">
-                <a href="#">1</a>
-                <a href="#" class="active">2</a>
-                <a href="#">3</a>
+                {{ $products->links('vendor.pagination.semantic-ui') }}
             </div>
         </div>
     </div>

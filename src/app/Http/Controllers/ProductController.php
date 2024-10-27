@@ -13,7 +13,8 @@ class ProductController extends Controller
 // 商品一覧画面表示
     public function index()
     {
-        $products = Product::with('seasons')->get();
+        $products = Product::with('seasons')->paginate(6);
+
         return view('index', compact('products'));
     }
 // 商品検索
