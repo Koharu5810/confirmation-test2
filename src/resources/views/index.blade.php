@@ -45,6 +45,7 @@
                 @if ($products->count() > 0)
                     @foreach ($products as $product)
                         <a href="{{ route('products.show', ['productId' => $product->id]) }}" class="product-item-link">
+                            <div class="product-item">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" />
                                 <div class="product-item__explanation">
                                     <div class="product-name">
