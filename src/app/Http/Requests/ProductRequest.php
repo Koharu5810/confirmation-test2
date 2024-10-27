@@ -24,7 +24,7 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => 'required|string|unique:products,name',
+            'name' => 'required|string|unique:products,name' . ($this->isMethod('patch') ? ',' . $this->route('productId') : ''),
             'price' => 'required|integer|between:0,10000',
             'description' => 'required|string|max:120',
             'season' => 'required|array|unique:seasons,name',

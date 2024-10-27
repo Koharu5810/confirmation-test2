@@ -17,7 +17,7 @@
     {{-- 画像選択 --}}
         <div class="form-top">
             <div class="form-image">
-                <img id="imagePreview" src="{{ asset($product->image) }}" alt="商品画像" style="display: block;" />
+                <img id="imagePreview" src="{{ asset('storage/images/products/' . $product->image) }}" alt="商品画像" style="display: block;" />
                 <input type="file" name="image" accept="image/*" class="form-image__button" onchange="previewImage(event)"/>
             </div>
             <div class="form__error">

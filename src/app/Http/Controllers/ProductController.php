@@ -32,11 +32,15 @@ class ProductController extends Controller
 // 商品変更
     public function update(ProductRequest $request, $productId)
     {
+        // 商品を取得
         $product = Product::findOrFail($productId);
 
-        $product->name = $request->input('name');
-        $product->price = $request->input('price');
-        $product->description = $request->input('description');
+        // 基本情報の更新
+        $product->update($request->only([
+            'name',
+            'price',
+            'description',
+        ]));
 
         // 画像がアップロードされた場合、画像を保存
         if ($request->hasFile('image')){
@@ -48,10 +52,20 @@ class ProductController extends Controller
             // 画像をimagesディレクトリに保存
             $dir = 'images/products';
             $image->storeAs($dir, $file_name, 'public');
+
+            // 元の画像ファイルの削除
+            if ($product->image) {
+                $oldImagePath = public_path('storage/images/products/' . $product->image);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+
             // 新しい画像名を保存
             $product->image = $file_name;
         }
 
+        // 変更を保存
         $product->save();
         // 季節の更新
         $product->seasons()->sync($request->input('season'));
@@ -62,7 +76,19 @@ class ProductController extends Controller
     public function destroy($productId)
     {
         $product = Product::findOrFail($productId);
+        // 中間テーブルのデータをクリア
+        $product->seasons()->detach();
+
+        // 画像ファイルの削除
+        if ($product->image) {
+            $imagePath = public_path('storage/images/products/' . $product->image);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+
         $product->delete();
+
         return redirect()->route('products.index');
     }
     // 商品登録画面表示
