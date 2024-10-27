@@ -1,0 +1,17 @@
+.header {
+    max-width: 1230px;
+    margin: 0 auto;
+    border: 1px solid yellow;
+}
+.header__logo {
+    margin-left: 20px;
+}
+.header__logo a {
+    color: rgb(230, 234, 21);
+    text-decoration: none;
+}
+.main-container {
+    background-color: #f8f8f8;
+    max-width: 1230px;
+    margin: 0 auto;
+}
