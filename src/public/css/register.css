@@ -1,5 +1,5 @@
 /* 商品登録画面 */
-.container {
+.product-register__container {
     background-color: #f8f8f8;
     max-width: 1230px;
     display: flex;
@@ -7,74 +7,95 @@
     align-items: center;
     padding: 30px;
 }
-.register-info {
-    font: bold 18px;
+.product-register__title {
+    font-size: 26px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    height: 70px;
+    margin-bottom: 10px;
 }
+
+/* フォーム */
 .form {
     width: 80%;
 }
-.form-group {
-    border: 1px solid pink;
+.form__group {
+    margin-bottom: 20px;
 }
-.form-group textarea {
-    resize: none;
-    margin-top: 0;
-    width: 100%;
-    height: 100px;
-}
-.form-title {
-    margin-top: 15px;
+.form__label {
+    margin-bottom: 10px;
     display: flex;
 }
-.form-required {
+.form__required {
     background-color: rgb(233, 38, 38);
+    font-size: 12px;
     color: #fff;
-    padding: 0 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5px;
     margin-left: 10px;
 }
-.form-group__input {
-    border: 1px solid skyblue;
+.form__group-input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
-.form__error {
-    color: red;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    border: 1px solid pink;
+.form__group-input input,
+.form__group-input textarea {
+    width: 100%;
+    padding: 6px;
+    border: none;
 }
-.form__error li{
-    color: red;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    
-    border: 1px solid orange;
+.form__group-input input {
+    height: 30px;
 }
-.form-image img {
+.form__group-input textarea {
+    resize: none;
+    height: 100px;
+}
+.form__image img {
     width: 200px;
     height: auto;
 }
-.form-image__button {
-    border: 1px solid skyblue;
-}
-.check-text {
+.form__check-text {
     color: rgb(233, 38, 38);
+    margin-left: 10px;
 }
-.check-group {
-    border: 1px solid skyblue;
+.form__check-group {
+    display: flex;
+    gap: 20px;
+}
+.form__error {
+    color: rgb(233, 38, 38);
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-/* ボタン部分 */
+/* フォームボタン部分 */
 .form__button {
     margin-top: 15px;
     display: flex;
     justify-content: center;
-    align-content: center;
     position: relative;
 }
-.form__button-return {
+.form__button-common {
+    width: 140px;
+    height: 35px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     margin: 0 10px;
 }
+.form__button-return {
+    background-color: #ccc;
+    color: #000;
+}
 .form__button-create {
-    border: 1px solid skyblue;
+    background-color: rgb(245, 201, 0);
+    border: none;
 }
