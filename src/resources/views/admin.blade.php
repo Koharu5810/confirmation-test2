@@ -15,10 +15,10 @@
             &nbsp;>&nbsp;{{ $product->name }}
         </div>
     {{-- 画像選択 --}}
-        <div class="form-top">
-            <div class="form-image">
+        <div class="form__top">
+            <div class="form__image">
                 <img id="imagePreview" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" style="display: block;" />
-                <input type="file" name="image" accept="image/*" class="form-image__button" onchange="previewImage(event)"/>
+                <input type="file" name="image" accept="image/*" class="form__image__button" onchange="previewImage(event)"/>
             </div>
             <div class="form__error">
                 @if($errors->has('image'))
@@ -27,11 +27,11 @@
                     @endforeach
                 @endif
             </div>
-            <div class="form-detail">
+            <div class="form__detail">
             {{-- 商品名 --}}
-                <div class="form-group">
-                    <label for="name">商品名</label>
-                    <div class="form-group__input">
+                <div class="form__group">
+                    <label for="name" class="form__label">商品名</label>
+                    <div class="form__group-input">
                         <input type="text" name="name" placeholder="商品名を入力" value="{{ old('name', $product->name) }}" />
                     </div>
                     <div class="form__error">
@@ -41,9 +41,9 @@
                     </div>
                 </div>
             {{-- 値段 --}}
-                <div class="form-group">
-                    <label for="price">値段</label>
-                    <div class="form-group__input">
+                <div class="form__group">
+                    <label for="price" class="form__label">値段</label>
+                    <div class="form__group-input">
                         <input type="text" name="price" placeholder="値段を入力" value="{{ old('price', $product->price) }}" />
                     </div>
                     <div class="form__error">
@@ -55,9 +55,9 @@
                     </div>
                 </div>
             {{-- 季節 --}}
-                <div class="form-group">
-                    <label for="season">季節</label>
-                    <div class="check-group">
+                <div class="form__group">
+                    <label for="season" class="form__label">季節</label>
+                    <div class="form__check-group">
                         @foreach($seasons as $season)
                             <label>
                                 <input type="checkbox" name="season[]" value="{{ $season->id }}"
@@ -75,11 +75,11 @@
             </div>
         </div>
     {{-- 商品説明入力 --}}
-        <div class="form-group">
-            <div class="form-group__input">
-                <label for="description">商品説明</label>
+        <div class="form__group">
+            <label for="description" class="form__label">商品説明</label>
+            <div class="form__group-input">
+                <textarea name="description" placeholder="商品の説明を入力">{{ old('description', $product->description) }}</textarea>
             </div>
-            <textarea name="description" placeholder="商品の説明を入力">{{ old('description', $product->description) }}</textarea>
             <div class="form__error">
                 @if($errors->has('description'))
                     @foreach($errors->get('description') as $message)
@@ -90,8 +90,8 @@
         </div>
     {{-- フォームボタン --}}
         <div class="form__button">
-            <a class="form__return-button" href="{{ route('products.index') }}">戻る</a>
-            <input class="form__update-button" type="submit" value="変更を保存" name="send" />
+            <a class="form__button-common form__return-button" href="{{ route('products.index') }}">戻る</a>
+            <input class="form__button-common form__update-button" type="submit" value="変更を保存" name="send" />
         </div>
     </form>
     @if(!$errors->any())

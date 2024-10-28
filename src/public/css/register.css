@@ -1,11 +1,9 @@
 /* 商品登録画面 */
 .product-register__container {
-    background-color: #f8f8f8;
-    max-width: 1230px;
+    padding: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px;
 }
 .product-register__title {
     font-size: 26px;
@@ -24,8 +22,8 @@
     margin-bottom: 20px;
 }
 .form__label {
-    margin-bottom: 10px;
     display: flex;
+    margin-bottom: 10px;
 }
 .form__required {
     background-color: rgb(233, 38, 38);
@@ -38,9 +36,10 @@
     margin-left: 10px;
 }
 .form__group-input {
+    background-color: #fff;
     width: 100%;
-    border: 1px solid #ccc;
     border-radius: 3px;
+    border: 1px solid #ccc;
 }
 .form__group-input input,
 .form__group-input textarea {
@@ -91,11 +90,11 @@
     justify-content: center;
     margin: 0 10px;
 }
-.form__button-return {
+.form__return-button {
     background-color: #ccc;
     color: #000;
 }
-.form__button-create {
+.form__create-button {
     background-color: rgb(245, 201, 0);
     border: none;
 }

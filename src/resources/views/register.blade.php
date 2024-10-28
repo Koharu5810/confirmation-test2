@@ -105,8 +105,8 @@
         </div>
     {{-- フォームボタン --}}
         <div class="form__button">
-            <a class="form__button-common form__button-return" href="{{ route('products.index') }}">戻る</a>
-            <input class="form__button-common form__button-create" type="submit" value="登録" name="send" />
+            <a class="form__button-common form__return-button" href="{{ route('products.index') }}">戻る</a>
+            <input class="form__button-common form__create-button" type="submit" value="登録" name="send" />
         </div>
     </form>
 </div>
