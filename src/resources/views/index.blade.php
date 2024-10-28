@@ -10,7 +10,7 @@
 {{-- メインコンテンツヘッダー部分 --}}
     <div class="product-list__header">
         <h3 class="product-list__header__info">商品一覧</h3>
-        <a href="{{ route('products.register') }}" class="product-list__add-button">+ 商品を追加</a>
+        <a href="{{ route('products.register') }}" class="button-common  product-list__add-button">+ 商品を追加</a>
     </div>
     <div class="product-list__layout">
 {{-- サイドバー --}}
@@ -20,7 +20,7 @@
                 <div class="sidebar__search-form">
                     <input type="text" name="search" placeholder="商品名で検索" value="{{ request('search') }}">
                 </div>
-                <button type="submit" class="search__button">検索</button>
+                <button type="submit" class="button-common  search__button">検索</button>
             {{-- ソートフォーム --}}
                 <div class="sidebar__sort-form">
                     <label class="sidebar__sort-title" for="sort">価格順で表示</label>
