@@ -2,10 +2,24 @@
 
 ## 環境構築
 **Dockerビルド**
-1. `git clone git@github.com:Koharu5810/confirmation-test2.git`
-2. DockerDesktopアプリを立ち上げる
-3. `docker-compose up -d --build`
+1. アプリケーションをクローンするディレクトリに移動
+2. `git clone git@github.com:Koharu5810/confirmation-test2.git`
+3. `cd confirmation-test2`
+4. DockerDesktopアプリを立ち上げる または `open -a docker`
+5. `docker-compose up -d --build`
 
+:::note info
+MacのM1・M2チップのPCの場合
+no matching manifest for linux/arm64/v8 in the manifest list entriesのメッセージが表示されビルドができないことがあります。 エラーが発生する場合は、docker-compose.ymlファイルの「mysql」内に「platform」の項目を追加で記載してください。その後`docker-compose down`でコンテナを停止し、`docker-compose up -d --build`で再ビルドしてください。
+:::
+```bash
+services:
+  mysql:
+    platform: linux/amd64
+
+  phpmyadmin:
+    platform: linux/amd64
+```
 
 **Laravel環境構築**
 1. `docker-compose exec php bash`
@@ -36,9 +50,9 @@ php artisan db:seed
 ```
 
 ## 使用技術(実行環境)
-| 言語・フレームワーク | バージョン |
+| 言語・フレームワーク    | バージョン   |
 | -------------------- | ---------- |
-| PHP                  | 8.3.12     |
+| PHP                  | 7.4.9      |
 | Laravel              | 8.83.27    |
 | MySQL                | 9.0.1      |
 
@@ -46,5 +60,5 @@ php artisan db:seed
 ![alt](erd.png)
 
 ## URL
-- 開発環境：http://localhost/
+- 開発環境：http://localhost/products
 - phpMyAdmin:：http://localhost:8080/
