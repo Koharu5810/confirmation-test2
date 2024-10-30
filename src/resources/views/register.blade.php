@@ -71,7 +71,7 @@
                 <div class="form__check-text">複数選択可</div>
             </div>
             <div class="form__check-group">
-                @foreach($seasons as $season)
+                @foreach($seasons->take(4) as $season)
                     <label class="custom-checkbox">
                         <input type="checkbox" name="season[]" value="{{ $season->id }}" class="custom-checkbox__input"
                         @if(in_array($season->id, old('season', []))) checked @endif />
