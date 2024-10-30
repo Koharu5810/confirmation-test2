@@ -93,10 +93,6 @@ class ProductController extends Controller
 // 商品登録
     public function store(ProductRequest $request)
     {
-        if ($request->hasFile('image')) {
-            return redirect()->back();
-        }
-
         $imagePath = $this->saveImage($request->file('image'));
 
         $product = Product::create([

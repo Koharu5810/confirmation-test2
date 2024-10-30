@@ -15,16 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('/products')->group(function (){
-    // 商品登録
-    Route::get('/register', [ProductController::class, 'create'])->name('products.register');
-    Route::post('/register', [ProductController::class, 'store']);
     // 商品一覧
     Route::get('', [ProductController::class, 'index'])->name('products.index');
     // 検索
     Route::get('/search', [ProductController::class, 'search'])->name('products.search');
+    // 商品登録
+    Route::get('/register', [ProductController::class, 'create'])->name('products.register');
+    Route::post('/register', [ProductController::class, 'store']);
     // 商品詳細
     Route::get('/{productId}', [ProductController::class, 'show'])->name('products.show');
-    // 商品変更
+    // 商品更新
     Route::patch('/{productId}/update', [ProductController::class, 'update'])->name('products.update');
     // 削除
     Route::delete('/{productId}/delete', [ProductController::class, 'destroy'])->name('products.destroy');
