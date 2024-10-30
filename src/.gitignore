@@ -15,5 +15,10 @@ yarn-error.log
 /.vscode
 # Ignore the entire storage directory
 /storage/*
-# ただし、特定のディレクトリやファイルは無視しない
+!/storage/app/
+/storage/app/*
+!/storage/app/public/
+/storage/app/public/*
+!/storage/app/public/images/
+/storage/app/public/images/*
 !/storage/app/public/images/products/
