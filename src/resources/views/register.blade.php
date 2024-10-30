@@ -36,7 +36,7 @@
             <div class="form__group-input">
                 <input type="text" name="price" placeholder="値段を入力" value="{{ old('price') }}" />
             </div>
-            @if($errors->has('price'))
+            @if ($errors->has('price'))
                 <ul class="form__error">
                     @foreach($errors->get('price') as $message)
                         <li>{{ $message }}</li>
