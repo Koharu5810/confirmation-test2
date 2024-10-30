@@ -59,10 +59,11 @@
                     <label for="season" class="form__label">季節</label>
                     <div class="form__check-group">
                         @foreach($seasons as $season)
-                            <label>
-                                <input type="checkbox" name="season[]" value="{{ $season->id }}"
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="season[]" value="{{ $season->id }}" class="custom-checkbox__input"
                                 @if($product->seasons->contains($season->id)) checked @endif />
-                                {{ $season->name }}
+                                <span class="custom-checkbox__circle"></span>
+                                <span class="custom-checkbox__label">{{ $season->name }}</span>
                             </label>
                         @endforeach
                     </div>

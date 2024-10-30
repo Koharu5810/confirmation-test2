@@ -32,7 +32,7 @@
 .form__group {
     margin-bottom: 20px;
 }
-.form__label{
+.form__label {
     display: flex;
     margin-bottom: 5px;
 }
@@ -45,19 +45,58 @@
 .form__group-input input,
 .form__group-input textarea {
     width: 100%;
-    padding: 6px;
+    padding: 8px;
     border: none;
 }
-.form__group-input input{
+.form__group-input input {
     height: 30px;
 }
 .form__group-input textarea {
+    display: block;
     resize: none;
     height: 100px;
+    line-height: 1.4;
+    box-sizing: border-box;
 }
 .form__check-group {
     display: flex;
-    gap: 20px;
+    align-items: center;
+    gap: 40px;
+}
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.custom-checkbox__input {
+    display: none; /* デフォルトのチェックボックスを非表示 */
+}
+.custom-checkbox__circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 1px solid #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.1s ease, border-color 0.1s ease;
+}
+.custom-checkbox__circle::before {
+    content: "✔";
+    font-size: 10px;
+    color: white;
+    display: none; /* 初期状態では非表示 */
+}
+.custom-checkbox__input:checked + .custom-checkbox__circle {
+    background-color: #666;
+    border-color: #666;
+}
+.custom-checkbox__input:checked + .custom-checkbox__circle::before {
+    display: block; /* チェックが入ったら表示 */
+}
+.custom-checkbox__label {
+    margin-left: 5px;
+    font-size: 16px;
 }
 .form__error {
     color: rgb(233, 38, 38);
