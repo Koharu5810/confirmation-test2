@@ -18,16 +18,10 @@
         <div class="form__top">
             <div class="form__image">
                 <img id="imagePreview"
-                src="{{ session('uploaded_image') ? asset('storage/' . session('uploaded_image')) : (isset($product->image) ? asset('storage/' . $product->image) : '') }}"
-                alt="{{ $product->name }}"
-                style="{{ session('uploaded_image') || isset($product->image) ? 'display: block;' : 'display: none;' }}" />
-                @if (session()->has('uploaded_image'))
-                    {{ session()->forget('uploaded_image') }}
-                @endif
+                    src="{{ isset($product->image) ? asset('storage/' . $product->image) : '' }}"
+                    alt="{{ $product->name }}"
+                    style="{{ isset($product->image) ? 'display: block;' : 'display: none; max-width:300px;' }}" />
                 <input type="file" name="image" accept="image/*" class="form__image__button" onchange="previewImage(event)"/>
-                @if (session()->has('uploaded_image_name'))
-                    {{ session()->forget('uploaded_image_name') }}
-                @endif
             </div>
             <div class="form__error">
                 @if($errors->has('image'))
@@ -131,9 +125,9 @@ function previewImage(event) {
             // imagePreview.src = e.target.result; // 読み込んだデータをimgタグのsrcに設定
         }
         reader.readAsDataURL(file); // 選択されたファイルをDataURLとして読み込む
-
     } else {
         imagePreview.src = ''; // ファイルが選択されていない場合、srcを空にする
+        imagePreview.style.display = 'none';
     }
 }
 </script>

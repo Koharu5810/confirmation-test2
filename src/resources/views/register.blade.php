@@ -51,7 +51,7 @@
                 <div class="form__required">必須</div>
             </div>
             <div class="form__image">
-                <img id="imagePreview" src="" alt="商品画像" style="display: none;" />
+                <img id="imagePreview" src="" alt="商品画像" style="display: none; max-width:300px;" />
                 <input type="file" name="image" accept="image/*" class="form__image-button" onchange="previewImage(event)" />
                 <input type="hidden" name="temp_image" value="{{ session('uploaded_image') }}" />
             </div>
