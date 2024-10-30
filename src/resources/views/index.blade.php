@@ -32,7 +32,7 @@
             {{-- ソートフォーム --}}
                 <div class="sidebar__sort-form">
                     <label class="sidebar__sort-title" for="sort">価格順で表示</label>
-                    <select name="sort" class="sidebar__sort-list" onchange="this.form.submit()">
+                    <select name="sort" class="sidebar__sort-list" onchange="changeColor(this); this.form.submit()">
                         <option value="" disabled {{ request('sort') === null ? 'selected' : '' }}>価格で並べ替え</option>
                         <option value="high" {{ request('sort') === 'high' ? 'selected' : '' }}>高い順に表示</option>
                         <option value="low" {{ request('sort') === 'low' ? 'selected' : '' }}>安い順に表示</option>
@@ -75,4 +75,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    function changeColor(sort) {
+        if( sort.value === "" ) {
+            sort.style.color = '';
+        } else {
+            sort.style.color = '#000';
+        }
+    }
+    // ページ読み込み時に初期の色を設定
+    document.addEventListener("DOMContentLoaded", function() {
+        const sortSelect = document.querySelector('.sidebar__sort-list');
+        changeColor(sortSelect);
+    });
+</script>
+
 @endsection
