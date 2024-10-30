@@ -1,4 +1,7 @@
-# mogitate(果物検索サイト)
+# mogitate (果物検索サイト)
+果物の一覧を表示します。
+値段や旬の季節なども掲載。
+その他、検索・新規登録・編集・削除ができます。
 
 ## 環境構築
 **Dockerビルド**
@@ -8,7 +11,7 @@
 4. DockerDesktopアプリを立ち上げる または `open -a docker`
 5. `docker-compose up -d --build`
 
-> MacのM1・M2チップのPCの場合
+> MacのM1・M2チップのPCの場合、
 > no matching manifest for linux/arm64/v8 in the manifest list entriesのメッセージが表示されビルドができないことがあります。
 > エラーが発生する場合は、docker-compose.ymlファイルの「mysql」内に「platform」の項目を追加で記載してください
 > その後`docker-compose down`でコンテナを停止し、`docker-compose up -d --build`で再ビルドしてください。
