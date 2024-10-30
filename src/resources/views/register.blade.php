@@ -52,7 +52,8 @@
             </div>
             <div class="form__image">
                 <img id="imagePreview" src="" alt="商品画像" style="display: none;" />
-                <input type="file" name="image" accept="image/*" class="form__image-button" onchange="previewImage(event)"/>
+                <input type="file" name="image" accept="image/*" class="form__image-button" onchange="previewImage(event)" />
+                <input type="hidden" name="temp_image" value="{{ session('uploaded_image') }}" />
             </div>
             @if($errors->has('image'))
                 <ul class="form__error">
@@ -113,25 +114,21 @@
 </div>
 
 <script>
-function previewImage(event) {
-    const imagePreview = document.getElementById('imagePreview');
-    const file = event.target.files[0]; // 選択されたファイルを取得
+    function previewImage(event) {
+        const imagePreview = document.getElementById('imagePreview');
+        const file = event.target.files[0]; // 選択されたファイルを取得
 
-    if (file) {
-        const reader = new FileReader(); // FileReaderオブジェクトを作成
-
-        // ファイルの読み込みが完了した際の処理
-        reader.onload = function(e) {
-            imagePreview.src = e.target.result; // 読み込んだデータをimgタグのsrcに設定
-            imagePreview.style.display = 'block'; // imgを表示
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.style.display = 'none';
         }
-
-        reader.readAsDataURL(file); // 選択されたファイルをDataURLとして読み込む
-    } else {
-        imagePreview.src = ''; // ファイルが選択されていない場合、srcを空にする
-        imagePreview.style.display = 'none'; // imgを非表示
     }
-}
 </script>
 
 @endsection

@@ -23,6 +23,7 @@ class ProductRequest extends FormRequest
      *
      * @return array
      */
+
     public function rules()
     {
         $rules = [

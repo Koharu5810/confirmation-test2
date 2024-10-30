@@ -93,11 +93,17 @@ class ProductController extends Controller
 // 商品登録
     public function store(ProductRequest $request)
     {
+        if ($request->hasFile('image')) {
+            return redirect()->back();
+        }
+
+        $imagePath = $this->saveImage($request->file('image'));
+
         $product = Product::create([
             'name' => $request->input('name'),
             'price' => $request->input('price'),
             'description' => $request->input('description'),
-            'image' => $this->saveImage($request->file('image')),
+            'image' => $imagePath,
         ]);
 
         $product->seasons()->attach($request->input('season'));
@@ -110,8 +116,7 @@ class ProductController extends Controller
     {
         // ディレクトリ保存時の画像ファイル名生成
         $fileName = time() . '_' . $image->getClientOriginalName();
-        // 画像ファイルを定数IMAGE_DIRで設定したディレクトリに保存
-        // 'public'はシンボリックリンクに関わる
+        // 画像ファイルを定数IMAGE_DIRで設定したディレクトリに保存。'public'はシンボリックリンクに関わる
         $image->storeAs(self::IMAGE_DIR, $fileName, 'public');
 
         return self::IMAGE_DIR . '/' . $fileName;
