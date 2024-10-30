@@ -9,22 +9,25 @@
     z-index: 1000;      /* 他の要素の上に表示 */
     display: flex;
     align-items: flex-end;
-    height: 50px;         /* ヘッダーの固定高さ */
+    height: 60px;         /* ヘッダーの固定高さ */
     box-sizing: border-box; /* paddingを含めたサイズ調整 */
 }
 .body {
     padding-top: 30px;
 }
 .header__logo {
-    margin-bottom: 0;
+    margin-bottom: 10px;
     margin-left: 20px;
+    font-family: "Charm", cursive;
+    font-weight: 400;
+    font-style: normal;
 }
 .header__logo a {
-    color: rgb(230, 234, 21);
+    color: rgb(245, 201, 0);
     text-decoration: none;
 }
 .main-container {
     background-color: #f8f8f8;
     max-width: 1230px;
-    margin: 50px auto 0;
+    margin: 60px auto 0;
 }
