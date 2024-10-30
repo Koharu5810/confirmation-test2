@@ -9,8 +9,16 @@
 <div class="container">
 {{-- メインコンテンツヘッダー部分 --}}
     <div class="product-list__header">
-        <h3 class="product-list__header__info">商品一覧</h3>
-        <a href="{{ route('products.register') }}" class="button-common  product-list__add-button">+ 商品を追加</a>
+        @if (request('search'))
+            @if ($products->count() > 0)
+                <h3 class="product-list__header__info">&quot;{{ request('search') }}&quot;の商品一覧</h3>
+            @else
+                <h3 class="product-list__header__info">&quot;{{ request('search') }}&quot;は見つかりませんでした</h3>
+            @endif
+        @else
+            <h3 class="product-list__header__info">商品一覧</h3>
+            <a href="{{ route('products.register') }}" class="button-common  product-list__add-button">+ 商品を追加</a>
+        @endif
     </div>
     <div class="product-list__layout">
 {{-- サイドバー --}}
@@ -58,8 +66,6 @@
                             </div>
                         </a>
                     @endforeach
-                @else
-                    <p>該当の商品が見つかりませんでした。</p>
                 @endif
             </div>
         {{-- ページネーション --}}
