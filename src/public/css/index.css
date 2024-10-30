@@ -9,6 +9,9 @@
     text-decoration: none;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
+.button-common:hover {
+    cursor: pointer;
+}
 
 .product-list__header {
     padding: 30px 15px 0 0;
@@ -100,7 +103,7 @@
 /* 一覧画面 */
 .products {
     width: 100%;
-    min-height: 600px;
+    min-height: 500px;
     padding: 0 15px;
     display: flex;
     flex-direction: column;

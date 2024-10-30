@@ -90,6 +90,9 @@
     justify-content: center;
     margin: 0 10px;
 }
+.form__button-common:hover {
+    cursor: pointer;
+}
 .form__return-button {
     background-color: #ccc;
     color: #000;

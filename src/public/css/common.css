@@ -1,9 +1,22 @@
 .header {
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     max-width: 1230px;
     margin: 0 auto;
-    border: 1px solid yellow;
+    z-index: 1000;      /* 他の要素の上に表示 */
+    display: flex;
+    align-items: flex-end;
+    height: 50px;         /* ヘッダーの固定高さ */
+    box-sizing: border-box; /* paddingを含めたサイズ調整 */
+}
+.body {
+    padding-top: 30px;
 }
 .header__logo {
+    margin-bottom: 0;
     margin-left: 20px;
 }
 .header__logo a {
@@ -13,5 +26,5 @@
 .main-container {
     background-color: #f8f8f8;
     max-width: 1230px;
-    margin: 0 auto;
+    margin: 50px auto 0;
 }

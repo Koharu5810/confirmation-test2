@@ -60,7 +60,10 @@
     gap: 20px;
 }
 .form__error {
-    color: red;
+    color: rgb(233, 38, 38);
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 /* フォームボタン部分 */
@@ -80,6 +83,9 @@
     justify-content: center;
     margin: 0 10px;
 }
+.form__button-common:hover {
+    cursor: pointer;
+}
 .form__return-button {
     background-color: #ccc;
     color: #000;
@@ -94,6 +100,9 @@
 }
 .form__delete-button {
     border: none;
+}
+.form__delete-button:hover {
+    cursor: not-allowed;
 }
 .form__delete-button img {
     width: 20px;

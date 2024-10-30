@@ -13,9 +13,9 @@
 <body>
     <header>
         <div class="header">
-            <div class="header__logo">
-                <h2><a href="{{ route('products.index') }}">mogitate</a></h2>
-            </div>
+            <h2 class="header__logo">
+                <a href="{{ route('products.index') }}">mogitate</a>
+            </h2>
         </div>
     </header>
 
