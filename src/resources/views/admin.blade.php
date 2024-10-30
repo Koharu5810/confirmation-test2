@@ -26,7 +26,7 @@
             <div class="form__error">
                 @if($errors->has('image'))
                     @foreach($errors->get('image') as $message)
-                        <span>{{ $message }}</span>
+                        <li>{{ $message }}</li>
                     @endforeach
                 @endif
             </div>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="form__error">
                         @error('name')
-                        {{ $message }}
+                            {{ $message }}
                         @enderror
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                     <div class="form__error">
                         @if($errors->has('price'))
                             @foreach($errors->get('price') as $message)
-                                <span>{{ $message }}</span>
+                                <li>{{ $message }}</li>
                             @endforeach
                         @endif
                     </div>
@@ -72,7 +72,7 @@
                     </div>
                     <div class="form__error">
                         @error('season')
-                        {{ $message }}
+                            {{ $message }}
                         @enderror
                     </div>
                 </div>
@@ -87,7 +87,7 @@
             <div class="form__error">
                 @if($errors->has('description'))
                     @foreach($errors->get('description') as $message)
-                        <span>{{ $message }}</span>
+                        <li>{{ $message }}</li>
                     @endforeach
                 @endif
             </div>
