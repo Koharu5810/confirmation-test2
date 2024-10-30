@@ -86,8 +86,18 @@
     }
     // ページ読み込み時に初期の色を設定
     document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.querySelector('.sidebar__search-form input');
         const sortSelect = document.querySelector('.sidebar__sort-list');
+
+        changeColor(searchInput);
         changeColor(sortSelect);
+
+        searchInput.addEventListener('input', function() {
+            changeColor(searchInput);
+        });
+        sortSelect.addEventListener('change', function() {
+            changeColor(sortSelect);
+        });
     });
 </script>
 
