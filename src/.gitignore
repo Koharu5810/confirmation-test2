@@ -14,11 +14,6 @@ yarn-error.log
 /.idea
 /.vscode
 # Ignore the entire storage directory
-/storage/*
-!/storage/app/
-/storage/app/*
+/storage/*/
 !/storage/app/public/
-/storage/app/public/*
-!/storage/app/public/images/
-/storage/app/public/images/*
 !/storage/app/public/images/products/
